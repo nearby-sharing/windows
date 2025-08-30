@@ -10,7 +10,7 @@
   <Folder Name="/lib/">
     <Project Path="lib/NearShare.Windows.Sender/NearShare.Windows.Sender.csproj" Id="baf7581c-759a-4751-b78f-c28ddc001ba6" />
   </Folder>
-  <Project Path="NearShare.Windows/NearShare.Windows.csproj" Id="ca65b500-37d7-488f-b4d8-11cea8251e66">
+  <Project Path="src/NearShare.Windows.csproj" Id="ca65b500-37d7-488f-b4d8-11cea8251e66">
     <Platform Solution="*|ARM64" Project="ARM64" />
     <Platform Solution="*|x64" Project="x64" />
     <Platform Solution="*|x86" Project="x86" />

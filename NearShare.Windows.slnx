@@ -1,0 +1,19 @@
+<Solution>
+  <Configurations>
+    <Platform Name="ARM64" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/build/">
+    <File Path="Directory.Build.props" />
+  </Folder>
+  <Folder Name="/lib/">
+    <Project Path="lib/NearShare.Windows.Sender/NearShare.Windows.Sender.csproj" Id="baf7581c-759a-4751-b78f-c28ddc001ba6" />
+  </Folder>
+  <Project Path="NearShare.Windows/NearShare.Windows.csproj" Id="ca65b500-37d7-488f-b4d8-11cea8251e66">
+    <Platform Solution="*|ARM64" Project="ARM64" />
+    <Platform Solution="*|x64" Project="x64" />
+    <Platform Solution="*|x86" Project="x86" />
+    <Deploy />
+  </Project>
+</Solution>

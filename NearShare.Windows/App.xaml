@@ -1,0 +1,29 @@
+<Application
+    x:Class="NearShare.Windows.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NearShare.Windows">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+                <!-- Other merged dictionaries here -->
+
+                <ResourceDictionary Source="/Controls/RemoteDevicePicker.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Spacing between cards -->
+            <x:Double x:Key="SettingsCardSpacing">4</x:Double>
+
+            <!-- Style (inc. the correct spacing) of a section header -->
+            <Style x:Key="SettingsSectionHeaderTextBlockStyle"
+               BasedOn="{StaticResource BodyStrongTextBlockStyle}"
+               TargetType="TextBlock">
+                <Style.Setters>
+                    <Setter Property="Margin" Value="1,30,0,6" />
+                </Style.Setters>
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

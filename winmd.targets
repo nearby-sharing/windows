@@ -1,0 +1,23 @@
+<Project>
+
+	<Target Name="GenerateWinMD" AfterTargets="BeforeBuild">
+
+		<Error Condition=" '$(IntermediateOutputPath)' == '' " Text="No 'IntermediateOutputPath'" />
+
+		<PropertyGroup>
+			<_OutDir>$(IntermediateOutputPath)Idl</_OutDir>
+
+			<WinSdkBasePath>C:\Program Files (x86)\Windows Kits\10</WinSdkBasePath>
+			<WinSdkIncludePath>$(WinSdkBasePath)\Include\$(TargetPlatformVersion)</WinSdkIncludePath>
+			<MidlIncludes>/I "$(WinSdkIncludePath)\winrt" /I "$(WinSdkIncludePath)\shared" /I "$(WinSdkIncludePath)\um"</MidlIncludes>
+		</PropertyGroup>
+
+		<ItemGroup>
+			<Idl Include="**/*.idl" />
+		</ItemGroup>
+
+		<Exec Command="midl.exe /winrt /nologo /notlb /nomidl $(MidlIncludes) /metadata_dir &quot;C:\Windows\System32\WinMetadata&quot; /outdir:&quot;$(_OutDir)&quot; @(Idl->'&quot;%(Identity)&quot;')" />
+
+	</Target>
+
+</Project>

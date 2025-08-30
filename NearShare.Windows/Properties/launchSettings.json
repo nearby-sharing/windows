@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "NearShare.Windows (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "NearShare.Windows (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

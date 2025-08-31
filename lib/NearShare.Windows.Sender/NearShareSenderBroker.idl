@@ -4,7 +4,6 @@ import "windows.system.remotesystems.idl";
 
 namespace Windows.ApplicationModel.Internal.DataTransfer.NearShare
 {
-
     [version(1.0)]
     enum NearShareStatus {
         Unknown = 0,

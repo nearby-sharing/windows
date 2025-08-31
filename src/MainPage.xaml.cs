@@ -13,9 +13,9 @@ using WinRT.Interop;
 
 namespace NearShare.Windows;
 
-public sealed partial class MainWindow : Window
+public sealed partial class MainPage : Page
 {
-    public MainWindow()
+    public MainPage()
     {
         InitializeComponent();
     }
@@ -32,7 +32,6 @@ public sealed partial class MainWindow : Window
                 ViewMode = PickerViewMode.Thumbnail,
                 FileTypeFilter = { "*" }
             };
-            InitializeWithWindow.Initialize(picker, WindowNative.GetWindowHandle(this));
             if (await picker.PickMultipleFilesAsync() is not { Count: > 0 } files)
                 return;
 
@@ -130,7 +129,7 @@ public sealed partial class MainWindow : Window
             return;
 
         Progress<SendDataProgress> progress = new();
-        await NearShareSender.SendAsync(device, files, progress);
+        await NearShareSender.OutOfProcess.SendAsync(device, files, progress);
     }
 
     async Task SendUriAsync(Uri uri)
@@ -140,16 +139,12 @@ public sealed partial class MainWindow : Window
             return;
 
         Progress<SendDataProgress> progress = new();
-        await NearShareSender.SendAsync(device, uri, progress);
+        await NearShareSender.OutOfProcess.SendAsync(device, uri, progress);
     }
 
     async Task<RemoteSystem?> PickRemoteSystemAsync()
     {
-        RemoteDevicePicker picker = new(
-            RemoteSystemDiscoveryType.Any,
-            RemoteSystemAuthorizationKind.Anonymous,
-            RemoteSystemStatusType.Available
-        )
+        RemoteDevicePicker picker = new()
         {
             XamlRoot = Content.XamlRoot
         };

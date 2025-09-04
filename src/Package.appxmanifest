@@ -32,7 +32,7 @@
 	</Resources>
 
 	<Applications>
-		<Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="App" uap10:SupportsMultipleInstances="true">
+		<Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="App">
 			<uap:VisualElements
 			  DisplayName="Utils for Nearby Sharing"
 			  Description="Utils for Nearby Sharing"
@@ -50,7 +50,7 @@
 			</uap:VisualElements>
 			<Extensions>
 				<uap5:Extension Category="windows.appExecutionAlias">
-					<uap5:AppExecutionAlias uap10:Subsystem="console">
+					<uap5:AppExecutionAlias>
 						<uap5:ExecutionAlias Alias="NearShare.exe" />
 					</uap5:AppExecutionAlias>
 				</uap5:Extension>

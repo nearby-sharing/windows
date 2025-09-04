@@ -9,7 +9,6 @@ using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using Windows.System;
 using Windows.System.RemoteSystems;
-using WinRT.Interop;
 
 namespace NearShare.Windows;
 

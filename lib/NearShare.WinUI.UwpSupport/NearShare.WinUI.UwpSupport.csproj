@@ -8,12 +8,8 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<CsWinRTIncludes>Windows.ApplicationModel.Internal.DataTransfer.NearShare</CsWinRTIncludes>
+		<CsWinRTIncludes>Microsoft.UI.Xaml</CsWinRTIncludes>
 	</PropertyGroup>
-
-	<ItemGroup Label="Dependencies">
-		<PackageReference Include="ShortDev.Microsoft.CorrelationVector" Version="2.0.0" />
-	</ItemGroup>
 
 	<Import Project="../../NearShare.WinMD.Sdk.targets" />
 

@@ -1,0 +1,72 @@
+import "inspectable.idl";
+import "Windows.ApplicationModel.idl";
+
+namespace Microsoft.UI.Xaml
+{
+
+    [version(1.0)]
+    enum ApplicationRequiresPointerMode
+    {
+        Auto = 0,
+        WhenRequested = 1
+    };
+
+    [version(1.0)]
+    [uuid(E4BEEC79-95FD-5841-ACEB-01A8A1FB73D0)]
+    delegate HRESULT SuspendingEventHandler([in] IInspectable* sender,[in] Windows.ApplicationModel.SuspendingEventArgs* e);
+
+    [version(1.0)]
+    [uuid(3D723B94-FBCF-5C0D-B6EF-5062E68BF9F8)]
+    delegate HRESULT LeavingBackgroundEventHandler([in] IInspectable* sender,[in] Windows.ApplicationModel.LeavingBackgroundEventArgs* e);
+
+    [version(1.0)]
+    [uuid(F9A5148D-8F72-553F-B479-21B68610899D)]
+    delegate HRESULT EnteredBackgroundEventHandler([in] IInspectable* sender,[in] Windows.ApplicationModel.EnteredBackgroundEventArgs* e);
+
+    [version(1.0)]
+    [uuid(B141561F-8528-5C4D-B13A-427A1EA36418)]
+    interface IApplicationFeature_UwpSupportApi : IInspectable
+    {
+        [propget] HRESULT RequiresPointerMode([out][retval] Microsoft.UI.Xaml.ApplicationRequiresPointerMode* value);
+        [propput] HRESULT RequiresPointerMode([in] Microsoft.UI.Xaml.ApplicationRequiresPointerMode value);
+        [eventadd] HRESULT Suspending([in] Microsoft.UI.Xaml.SuspendingEventHandler* handler,[out][retval] EventRegistrationToken* token);
+        [eventremove] HRESULT Suspending([in] EventRegistrationToken token);
+        [eventadd] HRESULT Resuming([in] Windows.Foundation.EventHandler<IInspectable*>* handler,[out][retval] EventRegistrationToken* token);
+        [eventremove] HRESULT Resuming([in] EventRegistrationToken token);
+        [eventadd] HRESULT LeavingBackground([in] Microsoft.UI.Xaml.LeavingBackgroundEventHandler* handler,[out][retval] EventRegistrationToken* token);
+        [eventremove] HRESULT LeavingBackground([in] EventRegistrationToken token);
+        [eventadd] HRESULT EnteredBackground([in] Microsoft.UI.Xaml.EnteredBackgroundEventHandler* handler,[out][retval] EventRegistrationToken* token);
+        [eventremove] HRESULT EnteredBackground([in] EventRegistrationToken token);
+    }
+
+    [version(1.0)]
+    [uuid(B26B3D00-A9D7-5A02-819C-65EFB7C3F612)]
+    interface IApplicationOverridesFeature_UwpSupportApi : IInspectable
+    {
+        HRESULT OnActivated([in] Windows.ApplicationModel.Activation.IActivatedEventArgs* args);
+        HRESULT OnFileActivated([in] Windows.ApplicationModel.Activation.FileActivatedEventArgs* args);
+        HRESULT OnSearchActivated([in] Windows.ApplicationModel.Activation.SearchActivatedEventArgs* args);
+        HRESULT OnShareTargetActivated([in] Windows.ApplicationModel.Activation.ShareTargetActivatedEventArgs* args);
+        HRESULT OnFileOpenPickerActivated([in] Windows.ApplicationModel.Activation.FileOpenPickerActivatedEventArgs* args);
+        HRESULT OnFileSavePickerActivated([in] Windows.ApplicationModel.Activation.FileSavePickerActivatedEventArgs* args);
+        HRESULT OnCachedFileUpdaterActivated([in] Windows.ApplicationModel.Activation.CachedFileUpdaterActivatedEventArgs* args);
+        HRESULT OnBackgroundActivated([in] Windows.ApplicationModel.Activation.BackgroundActivatedEventArgs* args);
+        HRESULT OnWindowCreated([in] Microsoft.UI.Xaml.WindowCreatedEventArgs* args);
+    }
+
+    [version(1.0)]
+    [exclusiveto(Microsoft.UI.Xaml.WindowCreatedEventArgs)]
+    [uuid(C407E71B-FE7F-50E8-B41C-BE6DF3113DD8)]
+    interface IWindowCreatedEventArgs : IInspectable
+    {
+        [propget] HRESULT Window([out][retval] IInspectable** value); // Microsoft.UI.Xaml.Window
+    }
+
+    [version(1.0)]
+    [marshaling_behavior(agile)]
+    runtimeclass WindowCreatedEventArgs
+    {
+        [default] interface Microsoft.UI.Xaml.IWindowCreatedEventArgs;
+    }
+
+}

@@ -2,8 +2,13 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using NearShare.Windows.Controls;
 using NearShare.Windows.Sender;
+using NearShare.Windows.Utils;
+using System.Buffers;
+using System.Runtime.CompilerServices;
 using Windows.ApplicationModel.DataTransfer;
+using Windows.ApplicationModel.DataTransfer.DragDrop.Core;
 using Windows.ApplicationModel.Internal.DataTransfer.NearShare;
+using Windows.Foundation;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
@@ -12,11 +17,13 @@ using Windows.System.RemoteSystems;
 
 namespace NearShare.Windows;
 
-public sealed partial class MainPage : Page
+public sealed partial class MainPage : Page, ICoreDropOperationTarget
 {
     public MainPage()
     {
         InitializeComponent();
+
+        CoreDragDropManager.GetForCurrentView().TargetRequested += OnDropTargetRequested;
     }
 
     #region Send
@@ -47,21 +54,7 @@ public sealed partial class MainPage : Page
         try
         {
             var clipboard = Clipboard.GetContent();
-            if (clipboard.Contains(StandardDataFormats.StorageItems))
-            {
-                var items = await clipboard.GetStorageItemsAsync();
-                await SendFilesAsync(items);
-            }
-            else if (clipboard.Contains(StandardDataFormats.Text))
-            {
-                var text = await clipboard.GetTextAsync();
-                await SendTextAsync(text);
-            }
-            else if (clipboard.Contains(StandardDataFormats.Uri))
-            {
-                var uri = await clipboard.GetUriAsync();
-                await SendUriAsync(uri);
-            }
+            await TrySendData(clipboard);
         }
         catch (Exception ex)
         {
@@ -97,6 +90,32 @@ public sealed partial class MainPage : Page
         {
             ShowErrorDialog(ex);
         }
+    }
+
+    static readonly SearchValues<string> SupportedDataFormats = SearchValues.Create([StandardDataFormats.StorageItems, StandardDataFormats.Text, StandardDataFormats.Uri, StandardDataFormats.Bitmap], StringComparison.Ordinal);
+
+    async Task<bool> TrySendData(DataPackageView dataPackage)
+    {
+        if (dataPackage.Contains(StandardDataFormats.StorageItems))
+        {
+            var items = await dataPackage.GetStorageItemsAsync();
+            await SendFilesAsync(items);
+        }
+        else if (dataPackage.Contains(StandardDataFormats.Text))
+        {
+            var text = await dataPackage.GetTextAsync();
+            await SendTextAsync(text);
+        }
+        else if (dataPackage.Contains(StandardDataFormats.Uri))
+        {
+            var uri = await dataPackage.GetUriAsync();
+            await SendUriAsync(uri);
+        }
+        else
+        {
+            return false;
+        }
+        return true;
     }
 
     async Task SendTextAsync(string text)
@@ -200,4 +219,48 @@ public sealed partial class MainPage : Page
         }
         catch { }
     }
+
+    #region DragNDrop
+
+    private void OnDropTargetRequested(CoreDragDropManager sender, CoreDropOperationTargetRequestedEventArgs args)
+    {
+        args.SetTarget(this);
+    }
+
+    IAsyncOperation<DataPackageOperation> ICoreDropOperationTarget.EnterAsync(CoreDragInfo dragInfo, CoreDragUIOverride dragUIOverride)
+    {
+        bool isSupported = dragInfo.Data.AvailableFormats.Any(SupportedDataFormats.Contains);
+        return Task.FromResult(isSupported ? DataPackageOperation.Copy : DataPackageOperation.None).AsAsyncOperation();
+    }
+
+    IAsyncOperation<DataPackageOperation> ICoreDropOperationTarget.OverAsync(CoreDragInfo dragInfo, CoreDragUIOverride dragUIOverride)
+    {
+        bool isSupported = dragInfo.Data.AvailableFormats.Any(SupportedDataFormats.Contains);
+        return Task.FromResult(isSupported ? DataPackageOperation.Copy : DataPackageOperation.None).AsAsyncOperation();
+    }
+
+    IAsyncAction ICoreDropOperationTarget.LeaveAsync(CoreDragInfo dragInfo)
+        => Task.CompletedTask.AsAsyncAction();
+
+    [AsyncMethodBuilder(typeof(AsyncOperationMethodBuilder<>))]
+    async IAsyncOperation<DataPackageOperation> ICoreDropOperationTarget.DropAsync(CoreDragInfo dragInfo)
+    {
+        bool isSupported = dragInfo.Data.AvailableFormats.Any(SupportedDataFormats.Contains);
+
+        if (!isSupported)
+            return DataPackageOperation.None;
+
+        try
+        {
+            await TrySendData(dragInfo.Data);
+        }
+        catch (Exception ex)
+        {
+            ShowErrorDialog(ex);
+        }
+        return DataPackageOperation.Copy;
+    }
+
+    #endregion
+
 }

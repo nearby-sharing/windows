@@ -31,7 +31,7 @@ jobs:
         uses: microsoft/setup-msbuild@v2
 
       - name: Install dependencies
-        run: msbuild windows /t:Restore /p:Configuration=Release
+        run: msbuild src /t:Restore /p:Configuration=Release
 
       - name: Build
-        run: msbuild windows /p:Configuration=Release /p:Platform=x64
+        run: msbuild src /p:Configuration=Release /p:Platform=x64

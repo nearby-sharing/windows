@@ -78,8 +78,7 @@ public sealed partial class MainPage : Page, ICoreDropOperationTarget
                     TextWrapping = TextWrapping.Wrap,
                     Height = 200,
                     Width = 400
-                }.Ref(out var textBox),
-                XamlRoot = Content.XamlRoot
+                }.Ref(out var textBox)
             };
             if (await dialog.ShowAsync() != ContentDialogResult.Primary)
                 return;
@@ -162,10 +161,7 @@ public sealed partial class MainPage : Page, ICoreDropOperationTarget
 
     async Task<RemoteSystem?> PickRemoteSystemAsync()
     {
-        RemoteDevicePicker picker = new()
-        {
-            XamlRoot = Content.XamlRoot
-        };
+        RemoteDevicePicker picker = new();
         return (await picker.PickDeviceAsync()).FirstOrDefault();
     }
 
@@ -210,8 +206,7 @@ public sealed partial class MainPage : Page, ICoreDropOperationTarget
                 Text = ex.Message,
                 TextWrapping = TextWrapping.Wrap,
                 MaxWidth = 400
-            },
-            XamlRoot = Content.XamlRoot
+            }
         };
         try
         {

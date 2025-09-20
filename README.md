@@ -1,6 +1,6 @@
 # Utils for Nearby Sharing
 
-Small WinUI 3 application that provides a view convenience features around the Nearby Sharing implementation built into Windows 10 / 11.
+Small WinUI 2 (UWP) application that provides a view convenience features around the Nearby Sharing implementation built into Windows 10 / 11.
 
 - 📡 Advanced share options
   - 📁 Share Files

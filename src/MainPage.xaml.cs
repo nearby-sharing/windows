@@ -1,5 +1,3 @@
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
 using NearShare.Windows.Controls;
 using NearShare.Windows.Sender;
 using NearShare.Windows.Utils;
@@ -14,6 +12,8 @@ using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using Windows.System;
 using Windows.System.RemoteSystems;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace NearShare.Windows;
 

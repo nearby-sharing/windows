@@ -8,17 +8,17 @@
     xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:community="using:CommunityToolkit.WinUI.Controls"
     xmlns:controls="using:NearShare.Windows.Controls"
-    xmlns:rive="using:CommunityToolkit.Labs.WinUI.Rive"
     mc:Ignorable="d">
 
-    <ScrollView>
+    <ScrollViewer>
         <StackPanel Padding="16" Spacing="{StaticResource SettingsCardSpacing}">
 
-            <rive:RivePlayer Width="300"
+            <!-- ToDo: Rive player -->
+            <!--<rive:RivePlayer Width="300"
                 Height="300"
                 HorizontalAlignment="Center"
                 DrawInBackground="True"
-                Source="ms-appx:///Assets/animation-welcome.riv" />
+                Source="ms-appx:///Assets/animation-welcome.riv" />-->
 
             <CommandBar Background="Transparent" DefaultLabelPosition="Right" HorizontalAlignment="Center">
                 <AppBarButton Icon="Document" Label="Send File" x:Name="SendFileButton" Click="SendFileButton_Click" />
@@ -61,5 +61,5 @@
             </community:SettingsCard>
 
         </StackPanel>
-    </ScrollView>
+    </ScrollViewer>
 </Page>

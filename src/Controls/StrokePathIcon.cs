@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.WinUI;
-using Microsoft.UI.Xaml.Controls;
 using System.Diagnostics;
-using PathShape = Microsoft.UI.Xaml.Shapes.Path;
+using Windows.UI.Xaml.Controls;
+using PathShape = Windows.UI.Xaml.Shapes.Path;
 
 namespace NearShare.Windows.Controls;
 

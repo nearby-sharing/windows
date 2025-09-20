@@ -1,5 +1,5 @@
-﻿using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Media;
+﻿using Windows.ApplicationModel.Activation;
+using Windows.UI.Xaml;
 
 namespace NearShare.Windows;
 
@@ -23,15 +23,10 @@ public partial class App : Application
     /// <param name="args">Details about the launch request and process.</param>
     protected override void OnLaunched(LaunchActivatedEventArgs args)
     {
-        Window window = Window.Current ?? new()
-        {
-            Title = "Nearby Sharing",
-            SystemBackdrop = new MicaBackdrop()
-        };
+        Window window = Window.Current;
 
         window.Content = new MainPage();
 
         window.Activate();
-        window.CoreWindow?.Activate();
     }
 }

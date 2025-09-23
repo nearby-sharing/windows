@@ -71,7 +71,7 @@ public sealed partial class RemoteDevicePicker : ContentDialog
         nameof(StatusType),
         typeof(RemoteSystemStatusType),
         typeof(RemoteDevicePicker),
-        new PropertyMetadata(RemoteSystemStatusType.Available)
+        new PropertyMetadata(RemoteSystemStatusType.Any)
     );
 
     /// <summary>

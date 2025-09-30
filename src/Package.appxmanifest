@@ -60,5 +60,6 @@
 
 	<Capabilities>
 		<uap3:Capability Name="remoteSystem"/>
+		<Capability Name="internetClient"/>
 	</Capabilities>
 </Package>

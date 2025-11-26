@@ -3,6 +3,7 @@ using System.Security;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace NearShare.Windows;
 
@@ -40,7 +41,10 @@ public partial class App : Application
     {
         Window window = Window.Current;
 
-        window.Content = new MainPage();
+        if (window.Content is not Frame frame)
+            window.Content = frame = new();
+
+        frame.Navigate(typeof(MainPage), args.Arguments);
 
         window.Activate();
     }

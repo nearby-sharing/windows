@@ -14,6 +14,7 @@ using Windows.System;
 using Windows.System.RemoteSystems;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace NearShare.Windows;
 
@@ -22,8 +23,16 @@ public sealed partial class MainPage : Page, ICoreDropOperationTarget
     public MainPage()
     {
         InitializeComponent();
+    }
 
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
         CoreDragDropManager.GetForCurrentView().TargetRequested += OnDropTargetRequested;
+    }
+
+    protected override void OnNavigatedFrom(NavigationEventArgs e)
+    {
+        CoreDragDropManager.GetForCurrentView().TargetRequested -= OnDropTargetRequested;
     }
 
     #region Send

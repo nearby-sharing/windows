@@ -1,6 +1,6 @@
 ﻿using Windows.System.RemoteSystems;
 
-namespace NearShare.Windows.Controls;
+namespace NearShare.Controls;
 
 public sealed class RemoteSystemAuthorizationKindInfo : IEnumDisplayInfo
 {

@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 using Windows.System;
 using Windows.System.RemoteSystems;
 
-namespace NearShare.Windows;
+namespace NearShare;
 
 /// <summary>
 /// Helper to List Remote Devices that are accessible

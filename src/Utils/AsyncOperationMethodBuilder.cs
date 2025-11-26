@@ -1,4 +1,4 @@
-﻿namespace NearShare.Windows.Utils;
+﻿namespace NearShare.Utils;
 
 // https://github.com/microsoft/CsWinRT/issues/2044
 

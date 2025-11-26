@@ -6,7 +6,7 @@ using Windows.Storage;
 using Windows.System.RemoteSystems;
 using Windows.UI.Notifications;
 
-namespace NearShare.Windows;
+namespace NearShare;
 
 internal static class ShareHelper
 {

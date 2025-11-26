@@ -1,4 +1,4 @@
-﻿namespace NearShare.Windows;
+﻿namespace NearShare;
 
 static class Extensions
 {

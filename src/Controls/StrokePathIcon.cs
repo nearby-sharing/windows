@@ -3,7 +3,7 @@ using System.Diagnostics;
 using Windows.UI.Xaml.Controls;
 using PathShape = Windows.UI.Xaml.Shapes.Path;
 
-namespace NearShare.Windows.Controls;
+namespace NearShare.Controls;
 
 // https://github.com/microsoft/microsoft-ui-xaml/blob/adae19431771d29b4c94d7a2bfd889e7d8c0fa4c/src/dxaml/xcp/core/core/elements/icon.cpp#L925-L958
 internal sealed partial class StrokePathIcon : PathIcon

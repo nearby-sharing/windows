@@ -1,10 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using NearShare.Controls;
 using System.Collections.ObjectModel;
 using Windows.System.RemoteSystems;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
-namespace NearShare.Windows.Controls;
+namespace NearShare.Controls;
 
 /// <summary>
 /// Picker Control to show List of Remote Devices that are accessible

@@ -1,7 +1,7 @@
 ﻿using Windows.UI.Xaml.Markup;
 using Windows.UI.Xaml.Media;
 
-namespace NearShare.Windows.Controls;
+namespace NearShare.Controls;
 
 public interface IEnumDisplayInfo
 {

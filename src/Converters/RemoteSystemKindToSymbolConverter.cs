@@ -4,7 +4,7 @@
 
 using Windows.UI.Xaml.Data;
 
-namespace NearShare.Windows.Converters;
+namespace NearShare.Converters;
 
 /// <summary>
 /// Converter to convert Device Type to Icon

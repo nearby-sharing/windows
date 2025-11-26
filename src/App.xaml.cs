@@ -5,7 +5,7 @@ using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace NearShare.Windows;
+namespace NearShare;
 
 /// <summary>
 /// Provides application-specific behavior to supplement the default Application class.

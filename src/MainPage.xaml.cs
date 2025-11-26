@@ -1,24 +1,20 @@
-using CommunityToolkit.Notifications;
-using NearShare.Windows.Controls;
-using NearShare.Windows.Sender;
-using NearShare.Windows.Utils;
+using NearShare.Controls;
+using NearShare.Utils;
 using System.Buffers;
 using System.Runtime.CompilerServices;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.DataTransfer.DragDrop.Core;
-using Windows.ApplicationModel.Internal.DataTransfer.NearShare;
 using Windows.Foundation;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using Windows.System;
 using Windows.System.RemoteSystems;
-using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace NearShare.Windows;
+namespace NearShare;
 
 public sealed partial class MainPage : Page, ICoreDropOperationTarget
 {

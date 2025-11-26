@@ -1,3 +1,4 @@
+using CommunityToolkit.Notifications;
 using NearShare.Windows.Controls;
 using NearShare.Windows.Sender;
 using NearShare.Windows.Utils;
@@ -12,6 +13,7 @@ using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using Windows.System;
 using Windows.System.RemoteSystems;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -154,8 +156,7 @@ public sealed partial class MainPage : Page, ICoreDropOperationTarget
         if (device is null)
             return;
 
-        Progress<SendDataProgress> progress = new();
-        await NearShareSender.OutOfProcess.SendAsync(device, files, progress);
+        await ShareHelper.SendFiles(device, files);
     }
 
     async Task SendUriAsync(Uri uri)
@@ -164,8 +165,7 @@ public sealed partial class MainPage : Page, ICoreDropOperationTarget
         if (device is null)
             return;
 
-        Progress<SendDataProgress> progress = new();
-        await NearShareSender.OutOfProcess.SendAsync(device, uri, progress);
+        await ShareHelper.SendUri(device, uri);
     }
 
     async Task<RemoteSystem?> PickRemoteSystemAsync()

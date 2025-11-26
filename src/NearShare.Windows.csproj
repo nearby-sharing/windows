@@ -24,6 +24,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="CommunityToolkit.Uwp.Controls.SettingsControls" Version="8.2.250402" />
 		<PackageReference Include="CommunityToolkit.Uwp.Extensions" Version="8.2.250402" />
 		<PackageReference Include="Microsoft.UI.Xaml" Version="2.8.7" />

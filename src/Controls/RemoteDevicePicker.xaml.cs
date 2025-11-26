@@ -1,6 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Collections.ObjectModel;
 using Windows.System.RemoteSystems;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
@@ -16,69 +16,15 @@ public sealed partial class RemoteDevicePicker : ContentDialog
     /// </summary>
     private ObservableCollection<RemoteSystem> RemoteSystems { get; set; } = [];
 
-    /// <summary>
-    /// Gets or sets the DeviceList Selection Mode. Defaults to ListViewSelectionMode.Single
-    /// </summary>
-    public RemoteDeviceSelectionMode SelectionMode
-    {
-        get => (RemoteDeviceSelectionMode)GetValue(SelectionModeProperty);
-        set => SetValue(SelectionModeProperty, value);
-    }
-
-    /// <summary>
-    /// Gets the dependency property for <see cref="SelectionMode"/>.
-    /// </summary>
-    public static readonly DependencyProperty SelectionModeProperty = DependencyProperty.Register(
-        nameof(SelectionMode),
-        typeof(RemoteDeviceSelectionMode),
-        typeof(RemoteDevicePicker),
-        new PropertyMetadata(RemoteDeviceSelectionMode.Single)
-    );
-
-    public RemoteSystemDiscoveryType DiscoveryType
-    {
-        get => (RemoteSystemDiscoveryType)GetValue(DiscoveryTypeProperty);
-        set => SetValue(DiscoveryTypeProperty, value);
-    }
-
-    public static readonly DependencyProperty DiscoveryTypeProperty = DependencyProperty.Register(
-        nameof(DiscoveryType),
-        typeof(RemoteSystemDiscoveryType),
-        typeof(RemoteDevicePicker),
-        new PropertyMetadata(RemoteSystemDiscoveryType.SpatiallyProximal)
-    );
-
-    public RemoteSystemAuthorizationKind AuthorizationKind
-    {
-        get => (RemoteSystemAuthorizationKind)GetValue(AuthorizationKindProperty);
-        set => SetValue(AuthorizationKindProperty, value);
-    }
-
-    public static readonly DependencyProperty AuthorizationKindProperty = DependencyProperty.Register(
-        nameof(AuthorizationKind),
-        typeof(RemoteSystemAuthorizationKind),
-        typeof(RemoteDevicePicker),
-        new PropertyMetadata(RemoteSystemAuthorizationKind.Anonymous)
-    );
-
-    public RemoteSystemStatusType StatusType
-    {
-        get => (RemoteSystemStatusType)GetValue(StatusTypeProperty);
-        set => SetValue(StatusTypeProperty, value);
-    }
-
-    public static readonly DependencyProperty StatusTypeProperty = DependencyProperty.Register(
-        nameof(StatusType),
-        typeof(RemoteSystemStatusType),
-        typeof(RemoteDevicePicker),
-        new PropertyMetadata(RemoteSystemStatusType.Any)
-    );
+    public RemoteDevicePickerOptions Options { get; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RemoteDevicePicker"/> class.
     /// </summary>
-    public RemoteDevicePicker()
+    public RemoteDevicePicker(RemoteDevicePickerOptions? options = null)
     {
+        Options = options ?? new();
+
         InitializeComponent();
         BuildFilters();
     }
@@ -102,9 +48,9 @@ public sealed partial class RemoteDevicePicker : ContentDialog
     private void BuildFilters()
     {
         RemoteDeviceHelper remoteDeviceHelper = new([
-             new RemoteSystemDiscoveryTypeFilter(DiscoveryType),
-             new RemoteSystemAuthorizationKindFilter(AuthorizationKind),
-             new RemoteSystemStatusTypeFilter(StatusType)
+             new RemoteSystemDiscoveryTypeFilter(Options.DiscoveryType),
+             new RemoteSystemAuthorizationKindFilter(Options.AuthorizationKind),
+             new RemoteSystemStatusTypeFilter(Options.StatusType)
         ]);
         RemoteSystems = remoteDeviceHelper.RemoteSystems;
 
@@ -150,4 +96,22 @@ public sealed partial class RemoteDevicePicker : ContentDialog
         //    _progressRing.IsActive = state;
         //}
     }
+}
+
+public sealed partial class RemoteDevicePickerOptions : ObservableObject
+{
+    /// <summary>
+    /// Gets or sets the DeviceList Selection Mode. Defaults to ListViewSelectionMode.Single
+    /// </summary>
+    [ObservableProperty]
+    public partial RemoteDeviceSelectionMode SelectionMode { get; set; } = RemoteDeviceSelectionMode.Single;
+
+    [ObservableProperty]
+    public partial RemoteSystemDiscoveryType DiscoveryType { get; set; } = RemoteSystemDiscoveryType.Any;
+
+    [ObservableProperty]
+    public partial RemoteSystemAuthorizationKind AuthorizationKind { get; set; } = RemoteSystemAuthorizationKind.Anonymous;
+
+    [ObservableProperty]
+    public partial RemoteSystemStatusType StatusType { get; set; } = RemoteSystemStatusType.Available;
 }

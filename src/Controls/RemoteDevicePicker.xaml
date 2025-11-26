@@ -36,7 +36,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- ToDo: Enum bindings do not work -->
+        <!--
+        ToDo: Enum bindings do not work 
         <Grid RowSpacing="8" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -85,6 +86,7 @@
                 </ComboBox.Items>
             </ComboBox>
         </Grid>
+        -->
 
         <ListView x:Name="_listDevices" IsItemClickEnabled="True" IsDoubleTapEnabled="True" IsMultiSelectCheckBoxEnabled="True" Grid.Row="1"
                   DoubleTapped="ListDevices_DoubleTapped"

@@ -2,7 +2,8 @@
 
 namespace NearShare.Controls;
 
-public sealed class RemoteSystemDiscoveryTypeInfo : IEnumDisplayInfo
+// ToDo: [GeneratedBindableCustomProperty]
+public sealed partial class RemoteSystemDiscoveryTypeInfo : IEnumDisplayInfo
 {
     public RemoteSystemDiscoveryType? Value { get; set; }
     public string DisplayName { get; set; } = string.Empty;

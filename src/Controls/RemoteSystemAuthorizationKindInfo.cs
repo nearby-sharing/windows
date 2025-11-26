@@ -2,7 +2,8 @@
 
 namespace NearShare.Controls;
 
-public sealed class RemoteSystemAuthorizationKindInfo : IEnumDisplayInfo
+// ToDo: [GeneratedBindableCustomProperty]
+public sealed partial class RemoteSystemAuthorizationKindInfo : IEnumDisplayInfo
 {
     public RemoteSystemAuthorizationKind Value { get; set; }
     public string DisplayName { get; set; } = string.Empty;

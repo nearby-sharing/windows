@@ -62,6 +62,12 @@
                 </community:SettingsCard.HeaderIcon>
             </community:SettingsCard>
 
+            <UserControl>
+                <UserControl.KeyboardAccelerators>
+                    <KeyboardAccelerator Key="Escape" Invoked="OnEscape" />
+                </UserControl.KeyboardAccelerators>
+            </UserControl>
+
         </StackPanel>
     </ScrollViewer>
 </Page>

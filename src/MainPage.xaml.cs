@@ -2,6 +2,7 @@ using NearShare.Controls;
 using NearShare.Utils;
 using System.Buffers;
 using System.Runtime.CompilerServices;
+using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.DataTransfer.DragDrop.Core;
 using Windows.Foundation;
@@ -12,6 +13,7 @@ using Windows.System;
 using Windows.System.RemoteSystems;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 
 namespace NearShare;
@@ -263,4 +265,8 @@ public sealed partial class MainPage : Page, ICoreDropOperationTarget
 
     #endregion
 
+    private void OnEscape(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
+    {
+        CoreApplication.Exit();
+    }
 }

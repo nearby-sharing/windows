@@ -2,6 +2,10 @@
 using System.Security;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Core;
+using Windows.Foundation;
+using Windows.UI;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -47,6 +51,35 @@ public partial class App : Application
         frame.Navigate(typeof(MainPage), args.Arguments);
 
         window.Activate();
+    }
+
+    protected override async void OnWindowCreated(WindowCreatedEventArgs args)
+    {
+        Size size = new(450, 600);
+
+        ApplicationView.PreferredLaunchViewSize = size;
+        ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+
+        CoreApplication.MainView.TitleBar.ExtendViewIntoTitleBar = true;
+
+        var appView = ApplicationView.GetForCurrentView();
+        appView.TitleBar.InactiveBackgroundColor = Colors.Transparent;
+        appView.TitleBar.ButtonBackgroundColor = Colors.Transparent;
+
+        return;
+
+        var prefs = ViewModePreferences.CreateDefault(ApplicationViewMode.CompactOverlay);
+        prefs.CustomSize = size;
+        prefs.ViewSizePreference = ViewSizePreference.Custom;
+
+        try
+        {
+            var didSucceed = await appView.TryEnterViewModeAsync(ApplicationViewMode.CompactOverlay, prefs);
+        }
+        catch (Exception ex)
+        {
+            SentrySdk.CaptureException(ex);
+        }
     }
 
     private async void OnSuspending(object sender, SuspendingEventArgs e)

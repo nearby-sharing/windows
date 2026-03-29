@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Notifications;
 using NearShare.Windows.Sender;
+using System.Collections;
 using System.Globalization;
 using Windows.ApplicationModel.Internal.DataTransfer.NearShare;
 using Windows.Storage;
@@ -15,7 +16,7 @@ internal static class ShareHelper
         await Transfer(
             device,
             title: string.Join(", ", files.Select(x => x.Name)),
-            progress => NearShareSender.OutOfProcess.SendAsync(device, files, progress),
+            progress => NearShareSender.OutOfProcess.SendAsync(device, new EnumerableFileList(files), progress),
             showFileStatus: true
         ).ConfigureAwait(false);
     }
@@ -105,4 +106,17 @@ internal static class ShareHelper
         NearShareStatus.PlatformError => "Platform Error",
         _ => "Unknown",
     };
+}
+
+sealed partial class EnumerableFileList(IEnumerable<IStorageItem> inner) : IEnumerable<IStorageItem>
+{
+    public IEnumerator<IStorageItem> GetEnumerator()
+    {
+        return inner.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return ((IEnumerable)inner).GetEnumerator();
+    }
 }

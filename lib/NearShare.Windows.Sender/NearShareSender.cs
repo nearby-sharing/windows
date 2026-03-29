@@ -1,4 +1,5 @@
 ﻿using Microsoft.CorrelationVector;
+using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.Internal.DataTransfer.NearShare;

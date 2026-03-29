@@ -63,7 +63,7 @@ public partial class App : Application
         CoreApplication.MainView.TitleBar.ExtendViewIntoTitleBar = true;
 
         var appView = ApplicationView.GetForCurrentView();
-        appView.TitleBar.InactiveBackgroundColor = Colors.Transparent;
+        appView.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
         appView.TitleBar.ButtonBackgroundColor = Colors.Transparent;
 
         return;

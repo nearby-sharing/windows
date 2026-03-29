@@ -10,7 +10,7 @@
     CloseButtonText="Cancel"
     PrimaryButtonText="Okay"
     IsPrimaryButtonEnabled="False"
-    DefaultButton="Close">
+    DefaultButton="Primary">
 
     <ContentDialog.Resources>
         <converters:RemoteSystemKindToSymbolConverter x:Key="KindToImageConverter" />
